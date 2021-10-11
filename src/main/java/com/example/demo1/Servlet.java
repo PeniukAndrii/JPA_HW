@@ -20,17 +20,26 @@ public class Servlet extends HttpServlet {
     EntityManager entityManager = emf.createEntityManager();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         Contact entity = new Contact();
-        Contact contact1 = entityManager.find(Contact.class, 1);
-        System.out.println(contact1.getId());
         entity.setFirstName(req.getParameter("firstName"));
         entity.setLastName(req.getParameter("lastName"));
         entity.setPhone(req.getParameter("phone"));
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
+    }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp){
+        Integer id = Integer.valueOf(req.getParameter("id"));
+        Contact contact = entityManager.find(Contact.class, id);
+        contact.setFirstName(req.getParameter("firstName"));
+        contact.setLastName(req.getParameter("lastName"));
+        contact.setPhone(req.getParameter("phone"));
+        entityManager.getTransaction().begin();
+        entityManager.persist(contact);
+        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -55,7 +64,7 @@ public class Servlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp){
         Integer id = Integer.valueOf(req.getPathInfo().substring(1));
         Contact contact = entityManager.find(Contact.class, id);
         entityManager.getTransaction().begin();
