@@ -5,7 +5,7 @@
              version="2.2">
     <persistence-unit name="jpa">
         <description>Hibernate Entity Manager Demo</description>
-        <class>com.example.demo1.Contact</class>
+        <class>com.example.demo1.models.Contact</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />

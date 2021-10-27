@@ -1,8 +1,11 @@
-package com.example.demo1;
+package com.example.demo1.models;
+
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
+@ToString
 @Table(name = "contacts")
 public class Contact {
 
@@ -16,6 +19,15 @@ public class Contact {
     private String lastName;
     @Column(name = "phone")
     private String phone;
+
+    public Contact() {
+    }
+
+    public Contact(String firstName, String lastName, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
